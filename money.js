@@ -49,6 +49,13 @@ var msSal = sSal/1000
 var todayStart = new Date()
 
 $(document).ready(function(){
+	(function() {
+	    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+	    link.type = 'image/x-icon';
+	    link.rel = 'shortcut icon';
+	    link.href = 'favicon.ico';
+	    document.getElementsByTagName('head')[0].appendChild(link);
+	})();
 	$('#ySal').change(function(){
 		setYearSal()
 	})
