@@ -1,0 +1,37 @@
+
+body{
+	font-family: 'Noto Sans KR','Montserrat', sans-serif;
+}
+
+h3{
+	position:absolute;
+	left:20%;
+}
+.centerDiv{
+	width:100%;
+	position:absolute;
+	top:50%;
+	left:50%;
+}
+
+.optionDiv{
+	position:absolute;
+	bottom:5%;
+	right:5%;
+	background:#f2f2f2;
+	border-radius:15px;
+	padding:15px;
+	opacity:0.9;
+}
+@media all and (max-width:400px), (max-height:400px){
+	.optionDiv{
+		position:absolute;
+		bottom:5%;
+		right:5%;
+		background:#f2f2f2;
+		border-radius:15px;
+		padding:15px;
+		opacity:0;
+		
+	}
+}
