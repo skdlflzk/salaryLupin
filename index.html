@@ -14,23 +14,34 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&amp;display=swap">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="./index.css" type="text/css">
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="./money.js"></script>
+<script src="./index.js"></script>
 <title>월급 어서오고 - 초급계산기</title>
 </header>
-<body style="font-family: 'Noto Sans KR','Montserrat', sans-serif;">
-<h3 style="position:absolute;left:20%;">💲일어나... 돈벌어야지...💲</h3>
-<div  style="width:100%;height:100px;position:absolute;top:50%;left:50%;">
+<body>
+<h3 >💲일어나... 돈벌어야지...💲</h3>
+<div class="centerDiv">
 	<text class="result"/>
 <!--<image src="https://image.tutpad.com/tut/0/53/11_MONEDA.gif" style="width:20%"/><br>-->
 	
 </div>
-<div style="position:absolute;bottom:5%;right:5%;background:#f2f2f2;border-radius:15px;padding:15px;opacity:0.9">
+<div class="optionDiv">
 <label for="ySal">연봉</label> <input name="ySal" id = "ySal" type="text" value="35000000"/>이고<br>
 <label for="probation">수습이예요(80%)</label><input type="checkbox" id = "probation" checked="true"/><br>
+<hr>
+근로시간<br>
 <input id = "start" type="text" value="0900"></input>부터 <br>
 <input id = "end" type="text" value="1800"></input>까지 <br>
-<input id = "break" type="text" value="1"></input>시간 쉽니다 <br>
+<hr>
+점심시간<br>
+<input id = "fstart" type="text" value="1200"></input>부터 <br>
+<input id = "fend" type="text" value="1300"></input>까지 <br>
+<hr>
+휴식
+<input id = "break" type="text" value="0"></input>시간
 </div>
 </body>
 </html>
