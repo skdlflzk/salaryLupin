@@ -67,6 +67,16 @@ $(document).ready(function(){
 	$('#end').change(function(){
 		setTodayStart()
 	})
+	
+	$('#break').change(function(){
+		setYearSal()
+	})
+	$('#fstart').change(function(){
+		setYearSal()
+	})
+	$('#fend').change(function(){
+		setYearSal()
+	})
 	$('#probation').change(function(){
 		setYearSal()
 	})
@@ -82,9 +92,11 @@ function setYearSal(){
 	mSal = ySal/12
 	dSal = mSal/wd
 	//console.log("일급" +dSal)
-	var wh = parseInt($('#end').val())/100 - parseInt($('#start').val())/100 - parseInt($('#break').val())
-//	console.log("wh =  "+ wh)
-	hSal = dSal/wh
+
+	var wh = parseInt($('#end').val()) - parseInt($('#start').val()) - parseInt($('#break').val())*100 - (parseInt($('#fend').val()) - parseInt($('#fstart').val()))
+
+	console.log("근로시간 wh =  "+ wh/100)
+	hSal = dSal/(wh/100)
 	sSal = hSal/(3600)
 	msSal = sSal/1000
 }
@@ -100,12 +112,38 @@ function setTodayStart(){
 function calcTotalsSal(start){
 //	console.log(start)
 //	console.log(Math.round(msSal * (Date.now() - start))+"원")
-	updateSal(Math.round(msSal * (Date.now() - start)))
+
+	fstarth = parseInt($('#fstart').val())/100
+	fstartm = parseInt($('#fstart').val())%100
+	fendh = parseInt($('#fend').val())/100
+	fendm = parseInt($('#fend').val())%100
+
+	fs = getTimeOf(fstarth,fstartm)
+	fe = getTimeOf(fendh,fendm)
+	if (fs <= Date.now() && Date.now() < fe){
+		updateBreak(Math.round(msSal * (fs - start)))
+	}else{
+		updateSal(Math.round(msSal * (Date.now() - start)))
+	}
 	setTimeout(function(){calcTotalsSal(start)},  100);
+}
+
+function getTimeOf(hour,min){
+	let t = new Date()
+	t.setHours(hour)
+	t.setMinutes(min)
+	t.setSeconds(0)
+	t.setMilliseconds(0)
+
+	return t.getTime();
 }
 
 function updateSal(s){
 	$(".result").text(locale(s) +" " + String.fromCharCode(parseInt("20a9",16)))
+}
+
+function updateBreak(s){
+	$(".result").text("현재 점심시간입니다.<br> 오전 근무까지 번 돈 : " + locale(s) +" " + String.fromCharCode(parseInt("20a9",16)))
 }
 
 function locale(s){
