@@ -82,7 +82,7 @@ $(document).ready(function(){
 	})
 	setYearSal()
 	setTodayStart()
-	calcTotalsSal(todayStart.getTime())
+	calcTotalsSal()
 })
 function setYearSal(){
 	var ySal =  parseInt($('#ySal').val())
@@ -102,30 +102,40 @@ function setYearSal(){
 }
 function setTodayStart(){
 	y = parseInt($('#start').val())/100
-	m =  parseInt($('#start').val())%100
+	m = parseInt($('#start').val())%100
 	todayStart.setHours(y)
 	todayStart.setMinutes(m)
 	todayStart.setSeconds(0)
 	todayStart.setMilliseconds(0)
 }
 
-function calcTotalsSal(start){
+function calcTotalsSal(){
 //	console.log(start)
 //	console.log(Math.round(msSal * (Date.now() - start))+"원")
 
+	starth =  parseInt($('#start').val())/100
+	startm =  parseInt($('#start').val())%100
+	endh =  parseInt($('#end').val())/100
+	endm =  parseInt($('#end').val())%100
 	fstarth = parseInt($('#fstart').val())/100
 	fstartm = parseInt($('#fstart').val())%100
 	fendh = parseInt($('#fend').val())/100
 	fendm = parseInt($('#fend').val())%100
 
+	s =  getTimeOf(starth,startm)
+	e =  getTimeOf(endh,endm)
 	fs = getTimeOf(fstarth,fstartm)
 	fe = getTimeOf(fendh,fendm)
-	if (fs <= Date.now() && Date.now() < fe){
-		updateBreak(Math.round(msSal * (fs - start)))
+	if ( Date.now() < s){
+		updateNotyet()
+	}else if (e < Date.now()){
+		updateRest(dSal)
+	}else if (fs <= Date.now() && Date.now() < fe){
+		updateBreak(Math.round(msSal * (fs - todayStart.getTime())))
 	}else{
-		updateSal(Math.round(msSal * (Date.now() - start)))
+		updateSal(Math.round(msSal * (Date.now() - todayStart.getTime())))
 	}
-	setTimeout(function(){calcTotalsSal(start)},  100);
+	setTimeout(function(){calcTotalsSal()},  100);
 }
 
 function getTimeOf(hour,min){
@@ -136,6 +146,15 @@ function getTimeOf(hour,min){
 	t.setMilliseconds(0)
 
 	return t.getTime();
+}
+
+
+function updateRest(s){
+	$(".result").text("퇴근하세요! " + s" + String.fromCharCode(parseInt("20a9",16)))
+}
+
+function updateNotyet(s){
+	$(".result").text("아직 출근 전입니다")
 }
 
 function updateSal(s){
