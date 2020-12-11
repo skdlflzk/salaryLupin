@@ -150,7 +150,7 @@ function getTimeOf(hour,min){
 
 
 function updateRest(s){
-	$(".result").text("퇴근하세요! " + s" + String.fromCharCode(parseInt("20a9",16)))
+	$(".result").text("퇴근하세요! " + s + String.fromCharCode(parseInt("20a9",16)))
 }
 
 function updateNotyet(s){
