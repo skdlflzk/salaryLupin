@@ -1,3 +1,7 @@
+/**
+*	SEE 월급일 기준(25일)으로 근무일 계산(일할 계산) 공휴일 고려되어있지 않음
+*	
+**/
 let t = new Date()
 let today = t.getDate()
 
@@ -32,6 +36,12 @@ if (today  <= 25){ //월급 전
 		}
 	}
 }
+
+/**
+*	SEE 일 시작시간, 끝나는 시간, 점심시간, 휴식시간 고려해서 1ms 당 버는 금액계산.
+*	TODO 전역변수만 남기고 setYearSal() 한번만 실행하는 편이 더 좋겠다
+*	
+**/
 
 var ySal =  parseInt($('#ySal').val());
 if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
@@ -84,6 +94,11 @@ $(document).ready(function(){
 	setTodayStart()
 	calcTotalsSal()
 })
+
+
+/**
+*	setYearSal() : Calculate  Salary/1ms and set it to global variable "msSal" 
+**/
 function setYearSal(){
 	var ySal =  parseInt($('#ySal').val())
 	if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
@@ -100,6 +115,10 @@ function setYearSal(){
 	sSal = hSal/(3600)
 	msSal = sSal/1000
 }
+
+/**
+*	setYearSal() : Set todayStart : Date with $('#start') InputText
+**/
 function setTodayStart(){
 	y = parseInt($('#start').val())/100
 	m = parseInt($('#start').val())%100
@@ -109,6 +128,14 @@ function setTodayStart(){
 	todayStart.setMilliseconds(0)
 }
 
+
+/**
+*	calcTotalsSal() : 
+*	1. Calculate today's total Salary until now 
+*	2. Display it using updateSal()
+*		2-1. if current time isn't on duty, then call [updateNotyet() | updateRest| updateBreak()] 
+*	3. REPEAT it every 100ms. (0.1s)
+**/
 function calcTotalsSal(){
 //	console.log(start)
 //	console.log(Math.round(msSal * (Date.now() - start))+"원")
