@@ -165,6 +165,13 @@ function calcTotalsSal(){
 	setTimeout(function(){calcTotalsSal()},  100);
 }
 
+
+/**
+*	getTimeOf(int hour,int min) : get TIMESTAMP value to calculate time interval with hour, min
+*
+*	@param hour:int, min:int ? get int type hour and min
+*	@return long; timestamp(Milliseconds since Epoch). ex) 1608169961072
+**/
 function getTimeOf(hour,min){
 	let t = new Date()
 	t.setHours(hour)
