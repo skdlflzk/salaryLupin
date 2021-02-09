@@ -44,9 +44,12 @@ if (today  <= 25){ //월급 전
 **/
 
 	
-var ySal =  getCookie("ySal", ySal)
-if (ySal == NULL)
-	ySal = 36000000
+var ySal =  getCookie("ySal")
+if (ySal == null)
+	ySal = 35000000
+var provation =  getCookie("probation")
+if (provation == null)
+	provation = false;
 if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
 else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
 //console.log('1'+ySal * 0.5)
