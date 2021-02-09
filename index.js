@@ -44,27 +44,14 @@ if (today  <= 25){ //월급 전
 **/
 
 	
-var ySal =  getCookie("ySal")
-console.log("1ySal = " + ySal)
-if (ySal == null)
-	ySal = 35000000
-console.log("2ySal = " + ySal)
-var provation =  getCookie("probation")
-if (provation == null)
-	provation = false;
-$('#probation').prop('checked', provation)
-if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
-$('#ySal').val(ySal)
-//else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
-//console.log('1'+ySal * 0.5)
-var mSal = ySal/12
-var dSal = mSal/wd
-//console.log("일급" +dSal)
-var wh = parseInt($('#end').val())/100 - parseInt($('#start').val())/100 -  parseInt($('#break').val())
-var hSal = dSal/wh
-var sSal = hSal/(3600)
-var msSal = sSal/1000
-//console.log("초급" + sSal)
+var ySal = 30000
+var provation = false
+var mSal = 1
+var dSal = 1
+var wh = 1
+var hSal = 1
+var sSal = 1
+var msSal = 1
 
 var todayStart = new Date()
 
@@ -105,6 +92,19 @@ $(document).ready(function(){
 		setCookie("probation", $('#probation').is(':checked'))
 		setYearSal()
 	})
+	
+	var ySal =  getCookie("ySal")
+	if (ySal == null)
+		ySal = 35000000
+	console.log("2ySal = " + ySal)
+	$('#ySal').val(ySal)
+	
+	
+	var probation =  getCookie("probation")
+	if (probation == null)
+		probation = false
+	$('#probation').prop('checked', provation)
+	
 	setYearSal()
 	setTodayStart()
 	calcTotalsSal()
@@ -116,7 +116,6 @@ $(document).ready(function(){
 **/
 function setYearSal(){
 	var ySal =  parseInt($('#ySal').val())
-	console.log("cookie ySal = " + ySal)
 	if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
 // 	else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
 //console.log('1'+ySal * 0.5)
