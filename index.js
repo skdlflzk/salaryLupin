@@ -43,7 +43,10 @@ if (today  <= 25){ //월급 전
 *	
 **/
 
-var ySal =  parseInt($('#ySal').val());
+	
+var ySal =  getCookie("ySal", ySal)
+if (ySal == NULL)
+	ySal = 36000000
 if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
 else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
 //console.log('1'+ySal * 0.5)
@@ -101,6 +104,7 @@ $(document).ready(function(){
 **/
 function setYearSal(){
 	var ySal =  parseInt($('#ySal').val())
+	setCookie("ySal", ySal)
 	if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
 	else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
 //console.log('1'+ySal * 0.5)
@@ -203,3 +207,24 @@ function locale(s){
 	return Intl.NumberFormat().format(s)
 }
 
+function setCookie(key, value) {
+    var todayDate = new Date();
+    todayDate.setDate(todayDate.getDate() + 365);
+    document.cookie = key + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+}
+function getCookie(key) {
+    var result = null;
+    var cookie = document.cookie.split(';');
+    cookie.some(function (item) {
+        // 공백을 제거
+        item = item.replace(' ', '');
+ 
+        var dic = item.split('=');
+ 
+        if (key === dic[0]) {
+            result = dic[1];
+            return true;    // break;
+        }
+    });
+    return result;
+}
