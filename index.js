@@ -52,7 +52,9 @@ console.log("2ySal = " + ySal)
 var provation =  getCookie("probation")
 if (provation == null)
 	provation = false;
+$('#probation').prop('checked', provation)
 if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
+$('#ySal').val(ySal)
 //else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
 //console.log('1'+ySal * 0.5)
 var mSal = ySal/12
@@ -75,6 +77,9 @@ $(document).ready(function(){
 	    document.getElementsByTagName('head')[0].appendChild(link);
 	})();
 	$('#ySal').change(function(){
+		
+		var ySal =  parseInt($('#ySal').val())
+		setCookie("ySal", ySal)
 		setYearSal()
 	})
 	
@@ -96,6 +101,8 @@ $(document).ready(function(){
 		setYearSal()
 	})
 	$('#probation').change(function(){
+		
+		setCookie("probation", $('#probation').is(':checked'))
 		setYearSal()
 	})
 	setYearSal()
@@ -109,10 +116,9 @@ $(document).ready(function(){
 **/
 function setYearSal(){
 	var ySal =  parseInt($('#ySal').val())
-	setCookie("ySal", ySal)
 	console.log("cookie ySal = " + ySal)
 	if ($('#probation').is(':checked') == true) ySal = ySal * 0.8
-	else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
+// 	else if ($('#probation').is(':checked') == false) ySal = parseInt($('#ySal').val())
 //console.log('1'+ySal * 0.5)
 	mSal = ySal/12
 	dSal = mSal/wd
